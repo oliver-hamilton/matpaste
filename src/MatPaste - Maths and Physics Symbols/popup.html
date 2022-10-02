@@ -1,0 +1,503 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Maths and Physics Symbols</title>
+    <script src="popup.js"></script>
+      
+    <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,900;1,300&display=swap" rel="stylesheet">
+      
+    <style>
+        
+        /*Animation for alert div*/
+        @keyframes showAlert {
+            0% {bottom: -400px;}
+            30% {bottom: 0px;}
+            70% {bottom: 0px;}
+            100% {bottom: -400px;}
+        }
+        /*Needed so animation can be repeated*/
+        @keyframes showAlertAgain {
+            0% {bottom: -400px;}
+            30% {bottom: 0px;}
+            70% {bottom: 0px;}
+            100% {bottom: -400px;}
+        }
+        
+        @keyframes showMenu {
+            from {left: -1000px;}
+            to {left: 0;}
+        }
+        
+        @keyframes hideMenu {
+            from {left: 0;}
+            to {left: -1000px;}
+        }
+        
+        @keyframes showDarkenedPanel {
+            from {right: 1000px;}
+            to {right: 0;}
+        }
+        
+        @keyframes hideDarkenedPanel {
+            from {right: 0;}
+            to {right: 1000px;}
+        }
+        /*CSS class that can be toggled to start animation*/
+        .startAnimation {
+            animation-name: showAlertAgain;
+    /*Retain the style values of the last keyframe*/
+            /*animation-fill-mode = forwards;*/
+            animation-duration: 1s;
+            animation-fill-mode: forwards;
+        }
+        
+        .startAnimationAgain {
+            animation-name: showAlert;
+    /*Retain the style values of the last keyframe*/
+            /*animation-fill-mode = forwards;*/
+            animation-duration: 1s;
+            animation-fill-mode: forwards;
+        }
+        
+        #alertDiv {
+            display: block;
+            position: absolute;
+            width: 100%;
+            text-align: center;
+            padding: 5px;
+            left: 0px;
+            bottom: -200px;
+            background-color: cornflowerblue;
+            margin: 0;
+            color: white;
+        }
+        
+        body {
+            width: 420px;
+            margin: 0;
+            height: 500px;
+        }
+        
+        div {
+            display: inline-block;
+            width: 65px;
+            vertical-align: top;
+        }
+        h1, h2, p {
+            font-family: 'Lato', sans-serif;
+            
+        }
+        p {
+            display: block;
+            width: 100%;
+            text-align: center;
+            font-size: 13px;
+            margin: 5px auto;
+            padding: 0;
+        }
+        h1 {
+            display: inline-block;
+            font-size: 20px;
+            /*margin: 10px auto;*/
+            text-align: center;
+            font-weight: 500;
+            color: white;
+            vertical-align: top;
+            
+        }
+        h2 {
+            font-size: 16px;
+            margin: 10px 10px;
+        }
+        
+        span {
+            margin: 0 auto;
+        }
+        
+        button {
+            display: block;
+            color: white;
+            width: 40px;
+            font-family: 'Times New Roman', sans-serif;
+            height: 40px; 
+            margin: 0 auto;
+            font-size: 28px;
+            background-color: cornflowerblue;
+            border: none;
+        }
+        
+        button:hover, .active {
+            /*Set to darker colour on hover*/
+            background-color: #3271e7; 
+            border: none;
+        }
+        
+        /*Hide the text area*/
+        textarea {
+            opacity:0;
+            width:0;
+            height:0;
+        }
+        
+        #modeText {
+            display: inline;
+        }
+        
+        #modeButton {
+            display: inline;
+            font-size: 14px;
+            font-family: 'Lato', sans-serif;
+            width: auto;
+            height: auto;
+            padding: 8px 10px;;
+        }
+        
+        #modeWrapper {
+            /*Temp*/
+            display: none;
+            width: 100%;
+            text-align: center;
+            height: auto;
+        }
+        
+        #hamburgerIcon {
+            display: inline-block;
+            /*width: 20px;*/
+            margin: 5px;
+            padding: 0;
+        }
+        
+        .topicGroup {
+            width: 100%;
+            display: block;
+        }
+        
+        #topBanner {
+            background-color: cornflowerblue;
+            width: 100%;
+            margin: 0;
+        }
+        
+        #menu {
+            display: block;
+            position: fixed;
+            width: 50%;
+            height: 100%;
+            background-color: cornflowerblue;
+            
+        }
+        
+        /*In order to toggle the visibility of the menu panel*/
+        .visibleFromLeftClass {
+            animation-name: showMenu;
+            animation-duration: 0.3s;
+            animation-fill-mode: forwards;
+        }
+        
+        .visibleFromRightClass {
+            animation-name: showDarkenedPanel;
+            animation-duration: 0.3s;
+            animation-fill-mode: forwards;
+        }
+        
+        .invisibleFromLeftClass {
+            animation-name: hideMenu;
+            animation-duration: 0.3s;
+            animation-fill-mode: forwards;
+        }
+        
+        .invisibleFromRightClass {
+            animation-name: hideDarkenedPanel;
+            animation-duration: 0.3s;
+            animation-fill-mode: forwards;
+        }
+        
+        #darkenedPanel {
+            display: block;
+            position: absolute;
+            /*right: 50%;*/
+            opacity: 0.5;
+            background-color: black;
+            width: 50%;
+            height: 100%;
+        }
+        
+        .menuButtons {
+            font-size: 14px;
+            font-family: 'Lato', sans-serif;
+            width: 100%;
+            
+        }
+        
+        /*Properties for physics-specific window*/
+        #infinity {
+            display: none;
+        }
+        
+        #sigma {
+            display: none;
+        }
+        
+        #group5 {
+            display: none;
+        }
+        #group6 {
+            display: none;
+        }
+        
+    </style>
+  </head>
+  <body>
+      <div id="topBanner">
+          <button id="hamburgerIcon">
+              <img src="hamburger-icon.png" width="20px">
+          </button>
+      <h1 id="header">Maths & Physics Symbols</h1>
+      <div id="modeWrapper">
+        <p id="modeText">Mode:</p><button id="modeButton">Show maths symbols</button>
+      </div>
+      </div>  
+      
+      <div id="menu" class="invisibleFromLeftClass">
+          <button class="menuButtons active" id="physicsButton">Show physics symbols</button>
+          <button class="menuButtons" id="mathsButton">Show maths symbols</button>
+          <button class="menuButtons" id="operatorsButton">Show operators</button>
+      </div>
+      <div id="darkenedPanel" class="invisibleFromRightClass">
+      </div>
+      
+      <div id="group1" class="topicGroup">
+      <h2 id="header1">Atomic structure / Radioactivity</h2>
+      
+      <div id="alpha">   
+          <button class="buttons">&#120572;</button>
+          <p>Alpha</p>
+      </div>
+      
+      <div id="beta">
+          <button class="buttons">&#120573;</button>
+          <p>Beta</p>
+      </div>
+      
+      <div id="gamma">
+          <button class="buttons">&#120574;</button>
+          <p>Gamma</p>
+      </div>
+      
+      <div id="mu">
+          <button class="buttons">&#956;</button>
+          <p>Mu</p>
+      </div>
+      
+      <div id="lambdaUpper">
+          <button class="buttons">&#923;</button>
+          <p>Lambda</p>
+      </div>
+          
+      </div>
+      
+      <div id="group2" class="topicGroup">
+      
+      <h2 id="header2">Mechanics</h2>
+      
+      <div id="alphaMechanics">   
+          <button class="buttons">&#120572;</button>
+          <p>Alpha</p>
+      </div>
+      
+      <div id="omega">
+          <button class="buttons">&#969;</button>
+          <p>Omega</p>
+      </div>
+      <div id="theta">
+          <button class="buttons">&#952;</button>
+          <p>Theta</p>
+      </div>
+      
+      <div id="pi">
+          <button class="buttons">&#960;</button>
+          <p>Pi</p>                                     
+      </div>
+          
+      </div>
+      
+      <div id="group3" class="topicGroup">
+      
+      <h2 id="header3">Electricity</h2>
+      
+      <div id="epsilon">
+          <button class="buttons">&#120576;</button>
+          <p>Epsilon</p>
+      </div>
+      
+      <div id="omegaUpper">
+          <button class="buttons">&#8486;</button>
+          <p>Omega</p>
+      </div>
+          
+      </div>
+      
+      <div id="group4" class="topicGroup">
+      
+      <h2 id="header4">Miscellaneous</h2>
+      
+      <div id="sigma">
+          <button class="buttons">&#931;</button>
+          <p>Sigma</p>
+      </div>
+      
+      <div id="psi">
+          <button class="buttons">&#120595;</button>
+          <p>Psi</p>
+      </div>
+      
+      <div id="delta">
+          <button class="buttons">&#916;</button>
+          <p>Delta</p>
+      </div>
+          
+      <div id="thetaUpper">
+          <button class="buttons">&#920;</button>  
+          <p>Theta</p>
+      </div>
+      
+      <div id="infinity">
+          <button class="buttons">&#8734;</button>
+          <p>Infinity</p>
+      </div>
+      
+      <div id="tau">
+          <button class="buttons">&#120591;</button>
+          <p>Tau</p>
+      </div>
+          
+      <div id="phi">
+          <button class="buttons">&#120567;</button>
+          <p>Phi</p>
+      </div>
+          
+      <div id="lambda">
+          <button class="buttons">&#955;</button>
+          <p>Lambda</p>
+      </div> 
+          
+      </div>
+      
+      <div id="group5" class="topicGroup">
+        <h2 id="header5">Sets</h2>
+      
+      <div id="emptySet">
+          <button class="buttons">&#8709;</button>
+          <p>Empty Set</p>
+      </div>
+      
+      <div id="universalQuantifier">
+          <button class="buttons">&#8704;</button>
+          <p>Universal Quantifier</p>
+      </div>
+      
+      <div id="existentialQuantifier">
+          <button class="buttons">&#8707;</button>
+          <p>Existential Quantifier</p>
+      </div>
+      
+      <div id="elementOf">
+          <button class="buttons">&#8712;</button>
+          <p>Element Of</p>
+      </div>
+      
+      <div id="notElementOf">
+          <button class="buttons">&#8713;</button>
+          <p>Not Element Of</p>
+      </div>
+      
+      <div id="naturalNumbers">
+          <button class="buttons">&#8469;</button>
+          <p>Natural Numbers</p>
+      </div>
+      
+      <div id="integers">
+          <button class="buttons">&#8484;</button>
+          <p>Integers</p>
+      </div>
+      
+      <div id="rationalNumbers">
+          <button class="buttons">&#8474;</button>
+          <p>Rational Numbers</p>
+      </div>
+      
+      <div id="realNumbers">
+          <button class="buttons">&#8477;</button>
+          <p>Real Numbers</p>
+      </div>
+          
+      </div> 
+      
+      <div id="group6" class="topicGroup"> 
+      <h2 id="header6">Operators</h2>
+          <div id="plusOrMinus">
+          <button class="buttons">&#8723;</button>
+          <p>Plus-or-minus</p>      
+          </div>
+          
+          <div id="squareRoot">
+          <button class="buttons">&#8730;</button>
+          <p>Square Root</p>
+          </div>
+          
+          <div id="cubeRoot">
+          <button class="buttons">&#8731;</button>
+          <p>Cube Root</p>
+          </div>
+          
+          <div id="fourthRoot">
+          <button class="buttons">&#8732;</button>
+          <p>Fourth Root</p>
+          </div>
+          
+          <div id="directlyProportional">
+          <button class="buttons">&#8733;</button>
+          <p>Directly Proportional</p>
+          </div>
+          
+          <div id="almostEqualTo">
+          <button class="buttons">&#8776;</button>
+          <p>Almost Equal To</p>
+          </div>
+          
+          <div id="dotProduct">
+          <button class="buttons">&#8901;</button>
+          <p>Dot Product</p>
+          </div>
+          
+          <div id="intersection">
+          <button class="buttons">&#8898;</button>
+          <p>Intersection</p>
+          </div>
+          
+          <div id="union">
+          <button class="buttons">&#8899;</button>
+          <p>Union</p>
+          </div>
+          
+          <div id="logicalAnd">
+          <button class="buttons">&#8896;</button>
+          <p>Logical And</p>
+          </div>
+          
+          <div id="logicalOr">
+          <button class="buttons">&#8897;</button>
+          <p>Logical Or</p>
+          </div>
+          
+                  
+      </div>
+    
+      <textarea id="hidden_text"></textarea>
+      
+      <div id="alertDiv">
+      <p>Icon copied to clipboard!</p>
+      </div> 
+      
+  </body>
+</html>
